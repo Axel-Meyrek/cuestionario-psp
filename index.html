@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cuestionario PSP</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="app">
+
+    <!-- Inicio -->
+    <section id="screen-start" class="screen active">
+      <p class="eyebrow">Personal Software Process</p>
+      <h1>Cuestionario PSP</h1>
+      <p class="muted lead">25 preguntas de opción múltiple</p>
+      <form id="start-form" class="start-form" autocomplete="off">
+        <input id="player-name" type="text" placeholder="Escribe tu nombre" maxlength="40" required>
+        <button type="submit" class="btn btn-primary">Comenzar</button>
+      </form>
+    </section>
+
+    <!-- Pregunta -->
+    <section id="screen-quiz" class="screen">
+      <header class="quiz-top">
+        <span id="q-counter" class="muted">1 / 25</span>
+        <span id="q-score" class="muted">0 correctas</span>
+      </header>
+      <div class="progress"><div id="progress-bar" class="progress-bar"></div></div>
+      <h2 id="q-text" class="question"></h2>
+      <div id="answers" class="answers"></div>
+      <div id="feedback" class="feedback hidden">
+        <p id="feedback-text"></p>
+        <button id="next-btn" class="btn btn-primary">Siguiente</button>
+      </div>
+    </section>
+
+    <!-- Final -->
+    <section id="screen-end" class="screen">
+      <p class="eyebrow">Prueba terminada</p>
+      <h1 id="end-name"></h1>
+      <div class="stats">
+        <div><span id="end-correct" class="stat-num">0</span><span class="muted">correctas</span></div>
+        <div><span id="end-pct" class="stat-num">0%</span><span class="muted">calificación</span></div>
+        <div><span id="end-time" class="stat-num">0s</span><span class="muted">tiempo</span></div>
+      </div>
+      <p id="sent-ok" class="sent-ok hidden">✓ Tus respuestas se enviaron correctamente.</p>
+      <p id="save-status" class="muted"></p>
+      <div class="row">
+        <button id="send-btn" class="btn btn-primary">Enviar respuestas</button>
+        <button id="retry-btn" class="btn">Volver a intentarlo</button>
+      </div>
+    </section>
+
+  </main>
+  <script src="config.js"></script>
+  <script src="preguntas.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
