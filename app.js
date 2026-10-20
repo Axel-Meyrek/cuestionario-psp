@@ -165,6 +165,8 @@ function terminar() {
   $("send-btn").textContent = "Enviar respuestas";
   $("send-btn").classList.remove("hidden");
   $("sent-ok").classList.add("hidden");
+  $("retry-btn").classList.remove("hidden");
+  $("home-btn").classList.add("hidden");
   mostrar("screen-end");
 }
 
@@ -182,6 +184,8 @@ async function enviar() {
     return;
   }
   btn.classList.add("hidden");
+  $("retry-btn").classList.add("hidden");
+  $("home-btn").classList.remove("hidden");
   $("sent-ok").classList.remove("hidden");
 }
 
@@ -205,5 +209,9 @@ $("start-form").addEventListener("submit", (e) => {
 $("next-btn").addEventListener("click", siguiente);
 $("send-btn").addEventListener("click", enviar);
 $("retry-btn").addEventListener("click", reintentar);
+$("home-btn").addEventListener("click", () => {
+  $("player-name").value = "";
+  mostrar("screen-start");
+});
 
 reenviarPendientes();
