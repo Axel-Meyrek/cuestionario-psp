@@ -183,7 +183,7 @@ h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); font-weight: 700; letter-spacing: -0
   height: 44px;
   display: grid;
   place-items: center;
-  border: 1.5px solid var(--line);
+  border: 1.5px solid var(--muted);
   border-radius: 50%;
   background: var(--bg);
   color: var(--fg);
