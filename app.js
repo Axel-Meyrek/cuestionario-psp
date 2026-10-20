@@ -200,6 +200,29 @@ function formatoDuracion(seg) {
   return m ? `${m}m ${s}s` : `${s}s`;
 }
 
+// ---------- Tema claro / oscuro ----------
+const TEMA_KEY = "psp-tema";
+const sistemaOscuro = window.matchMedia("(prefers-color-scheme: dark)");
+
+function temaActual() {
+  return document.documentElement.dataset.theme || (sistemaOscuro.matches ? "dark" : "light");
+}
+
+function pintarBotonTema() {
+  const oscuro = temaActual() === "dark";
+  $("theme-toggle").classList.toggle("is-dark", oscuro);
+  $("theme-toggle").setAttribute("aria-label", oscuro ? "Cambiar a modo claro" : "Cambiar a modo oscuro");
+}
+
+$("theme-toggle").addEventListener("click", () => {
+  const nuevo = temaActual() === "dark" ? "light" : "dark";
+  document.documentElement.dataset.theme = nuevo;
+  try { localStorage.setItem(TEMA_KEY, nuevo); } catch {}
+  pintarBotonTema();
+});
+sistemaOscuro.addEventListener("change", pintarBotonTema);
+pintarBotonTema();
+
 // ---------- Eventos ----------
 $("start-form").addEventListener("submit", (e) => {
   e.preventDefault();

@@ -4,7 +4,21 @@
   --muted: #6b6b6b;
   --line: #e2e2e2;
   --soft: #f5f5f5;
+  --primary-hover: #333;
   --radius: 14px;
+  color-scheme: light;
+}
+
+/* Modo oscuro: sigue al sistema salvo que la persona elija "claro" con el botón. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #000; --fg: #fff; --muted: #9a9a9a; --line: #2c2c2c; --soft: #141414; --primary-hover: #ddd;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #000; --fg: #fff; --muted: #9a9a9a; --line: #2c2c2c; --soft: #141414; --primary-hover: #ddd;
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -19,6 +33,7 @@ body {
   min-height: 100dvh;
   line-height: 1.45;
   -webkit-font-smoothing: antialiased;
+  transition: background .2s, color .2s;
 }
 
 #app {
@@ -54,7 +69,7 @@ h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); font-weight: 700; letter-spacing: -0
 .btn:hover { background: var(--soft); }
 .btn:active { transform: scale(.97); }
 .btn-primary { background: var(--fg); color: var(--bg); }
-.btn-primary:hover { background: #333; }
+.btn-primary:hover { background: var(--primary-hover); }
 .btn-danger { border-color: var(--line); color: var(--muted); }
 .btn-link {
   border: none; background: none; padding: 0;
@@ -150,10 +165,6 @@ h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); font-weight: 700; letter-spacing: -0
   .feedback .btn, .start-form .btn, .row .btn { width: 100%; }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root { --bg: #000; --fg: #fff; --muted: #9a9a9a; --line: #2c2c2c; --soft: #141414; }
-  .btn-primary:hover { background: #ddd; }
-}
 
 .sent-ok {
   font-size: 1.25rem;
@@ -162,3 +173,28 @@ h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); font-weight: 700; letter-spacing: -0
   border: 1.5px solid var(--fg);
   border-radius: var(--radius);
 }
+
+/* Botón de tema */
+.theme-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1.5px solid var(--line);
+  border-radius: 50%;
+  background: var(--bg);
+  color: var(--fg);
+  cursor: pointer;
+  z-index: 10;
+  transition: border-color .15s, background .2s;
+}
+.theme-toggle:hover { border-color: var(--fg); }
+.theme-toggle:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+.theme-toggle svg { width: 20px; height: 20px; }
+.theme-toggle .icon-sun { display: none; }
+.theme-toggle.is-dark .icon-sun { display: block; }
+.theme-toggle.is-dark .icon-moon { display: none; }
+#app { padding-top: max(76px, clamp(28px, 6vw, 72px)); }
